@@ -50,7 +50,9 @@ func (h *IngestionHandler) HandleLLMRequest(w http.ResponseWriter, r *http.Reque
 	}
 
 	w.WriteHeader(http.StatusAccepted)
-	json.NewEncoder(w).Encode(map[string]string{"status": "accepted"})
+	if err := json.NewEncoder(w).Encode(map[string]string{"status": "accepted"}); err != nil {
+		log.Printf("Failed to encode response: %v", err)
+	}
 }
 
 // HandleLLMResponse handles POST /v1/llm/response
@@ -83,11 +85,15 @@ func (h *IngestionHandler) HandleLLMResponse(w http.ResponseWriter, r *http.Requ
 	}
 
 	w.WriteHeader(http.StatusAccepted)
-	json.NewEncoder(w).Encode(map[string]string{"status": "accepted"})
+	if err := json.NewEncoder(w).Encode(map[string]string{"status": "accepted"}); err != nil {
+		log.Printf("Failed to encode response: %v", err)
+	}
 }
 
 // HandleHealth handles GET /health
 func (h *IngestionHandler) HandleHealth(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"status": "healthy"})
+	if err := json.NewEncoder(w).Encode(map[string]string{"status": "healthy"}); err != nil {
+		log.Printf("Failed to encode health response: %v", err)
+	}
 }

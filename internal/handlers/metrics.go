@@ -72,14 +72,18 @@ func (h *MetricsHandler) HandleGetMetrics(w http.ResponseWriter, r *http.Request
 	// Return results as JSON
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]interface{}{
+	if err := json.NewEncoder(w).Encode(map[string]interface{}{
 		"metrics": metrics,
 		"count":   len(metrics),
-	})
+	}); err != nil {
+		log.Printf("Failed to encode metrics response: %v", err)
+	}
 }
 
 // HandleHealth handles GET /health
 func (h *MetricsHandler) HandleHealth(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"status": "healthy"})
+	if err := json.NewEncoder(w).Encode(map[string]string{"status": "healthy"}); err != nil {
+		log.Printf("Failed to encode health response: %v", err)
+	}
 }
