@@ -16,28 +16,28 @@ type LLMRequest struct {
 
 // LLMResponse represents a response event from an LLM service
 type LLMResponse struct {
-	RequestID        string     `json:"request_id"`
-	Timestamp        time.Time  `json:"timestamp"`
-	LatencyMs        int        `json:"latency_ms"`
-	CompletionTokens int        `json:"completion_tokens"`
-	FinishReason     string     `json:"finish_reason"`
-	Error            *string    `json:"error,omitempty"`
+	RequestID        string    `json:"request_id"`
+	Timestamp        time.Time `json:"timestamp"`
+	LatencyMs        int       `json:"latency_ms"`
+	CompletionTokens int       `json:"completion_tokens"`
+	FinishReason     string    `json:"finish_reason"`
+	Error            *string   `json:"error,omitempty"`
 }
 
 // LLMMetrics represents aggregated metrics for a time window
 type LLMMetrics struct {
-	TenantID              string    `json:"tenant_id"`
-	Route                 string    `json:"route"`
-	Model                 string    `json:"model"`
-	WindowStart           time.Time `json:"window_start"`
-	WindowEnd             time.Time `json:"window_end"`
-	Requests              int       `json:"requests"`
-	Errors                int       `json:"errors"`
-	AvgLatencyMs          float64   `json:"avg_latency_ms"`
-	P95LatencyMs          float64   `json:"p95_latency_ms"`
-	AvgPromptTokens       float64   `json:"avg_prompt_tokens"`
-	AvgCompletionTokens   float64   `json:"avg_completion_tokens"`
-	EstimatedCostUSD      float64   `json:"estimated_cost_usd"`
+	TenantID            string    `json:"tenant_id"`
+	Route               string    `json:"route"`
+	Model               string    `json:"model"`
+	WindowStart         time.Time `json:"window_start"`
+	WindowEnd           time.Time `json:"window_end"`
+	Requests            int       `json:"requests"`
+	Errors              int       `json:"errors"`
+	AvgLatencyMs        float64   `json:"avg_latency_ms"`
+	P95LatencyMs        float64   `json:"p95_latency_ms"`
+	AvgPromptTokens     float64   `json:"avg_prompt_tokens"`
+	AvgCompletionTokens float64   `json:"avg_completion_tokens"`
+	EstimatedCostUSD    float64   `json:"estimated_cost_usd"`
 }
 
 // Validate checks if LLMRequest has all required fields

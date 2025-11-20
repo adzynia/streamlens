@@ -1,0 +1,58 @@
+run:
+  timeout: 5m
+  tests: true
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - gofmt
+    - goimports
+
+linters-settings:
+  errcheck:
+    check-blank: false
+    check-type-assertions: false
+  
+  govet:
+    enable-all: false
+    enable:
+      - assign
+      - atomic
+      - bools
+      - buildtag
+      - composites
+      - copylocks
+      - errorsas
+      - httpresponse
+      - loopclosure
+      - lostcancel
+      - nilfunc
+      - printf
+      - structtag
+      - tests
+      - unmarshal
+      - unreachable
+      - unusedresult
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  
+  exclude-rules:
+    # Exclude some linters from running on tests files
+    - path: _test\.go
+      linters:
+        - errcheck
+    
+    # Exclude error checks for deferred Close() calls
+    - text: "Error return value of .((os\\.)?std(out|err)\\..*|.*Close|.*Flush|os\\.Remove(All)?|.*print(f|ln)?|os\\.(Un)?Setenv). is not checked"
+      linters:
+        - errcheck
